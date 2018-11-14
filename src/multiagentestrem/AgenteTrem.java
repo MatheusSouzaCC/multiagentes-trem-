@@ -20,35 +20,23 @@ public class AgenteTrem extends Agent {
     protected void setup() {
         System.out.println("Trem inicializado");
         //Recebendo Mensagem do Semaforo
-        addBehaviour(new CyclicBehaviour(this) {
-            
+
+        // Enviando Mensagem pro AgenteSemaforo avisando que está perto!
+        addBehaviour(new OneShotBehaviour(this) {
             public void action() {
-                ACLMessage msg = myAgent.receive();
+                String mensagem;
+                System.out.println("Trem Inicializado");
                 
-                if (msg != null) {
-                    ACLMessage reply = msg.createReply();
-                    String content = msg.getContent();
+                ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+                msg.addReceiver(new AID("AgenteSemaforo", AID.ISLOCALNAME));
+                msg.setLanguage("Português");
+                msg.setOntology("Distância");
 
-                    //Recebendo a mensagem do Semaforo.
-                    //Recebendo a pergunta do Semaforo: "Está Próximo?"
-                    if (content.equalsIgnoreCase("Proximidade")) {
-                        reply.setPerformative(ACLMessage.INFORM);
-                        
-                        //Verifica a distancia
-                        if (true) {
-                            reply.setContent("Recebi sua Pergunta! Estou Próximo!");
-                        } else {
-                            reply.setContent("Recebi sua Pergunta! Estou Longe!");
-                        }
+                // Manda mensagem apenas se está próximo
+                mensagem = ("Estou no KM:" + "10");
+                msg.setContent(mensagem);
 
-                        myAgent.send(reply);
-                        System.out.println("O agente " + msg.getSender().getName() + " avisou que o Semaforo está Fechado");
-                        System.out.println("Vou aguardar a liberação!");
-
-                    }
-                } else {
-                    block();
-                }
+                myAgent.send(msg);
             }
         });
 

@@ -30,17 +30,11 @@ public class AgenteCarro extends Agent {
                     //Recebendo a mensagem do Semaforo.
                     //Recebendo que o Semaforo está fechado, e que vai aguardar a liberação
                     if (content.equalsIgnoreCase("Fechado")) {
-//                        reply.setPerformative(ACLMessage.INFORM);
-//                        reply.setContent("Recebi seu aviso! Estou Parando");
-//                        myAgent.send(reply);
                         System.out.println("O agente " + msg.getSender().getName() + " avisou que o Semaforo está Fechado");
                         System.out.println("Vou aguardar a liberação!");
 
-                        //Recebendo que o Semaforo está Aberto, e que vai Continuar o trajeto
+                    //Recebendo que o Semaforo está Aberto, e que vai Continuar o trajeto
                     } else if (content.equalsIgnoreCase("Aberto")) {
-//                        reply.setPerformative(ACLMessage.INFORM);
-//                        reply.setContent("Recebi seu aviso! Estou Continunado meu Trajeto");
-//                        myAgent.send(reply);
                         System.out.println("O agente " + msg.getSender().getName() + " avisou que o Semaforo está Aberto");
                         System.out.println("Vou continuar meu Trajeto!");
                     }

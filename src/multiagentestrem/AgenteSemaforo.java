@@ -16,41 +16,37 @@ import jade.core.AID;
  * @author julio
  */
 public class AgenteSemaforo extends Agent {
-    
+
     boolean tremProximo;
-    
+
     protected void setup() {
 
-        // Enviando Mensagem pro AgenteTrem perguntando se está perto!
-        addBehaviour(new OneShotBehaviour(this) {
-            public void action() {
-                System.out.println("Semaforo Inicializado");
-                ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-                msg.addReceiver(new AID("AgenteTrem", AID.ISLOCALNAME));
-                msg.setLanguage("Português");
-                msg.setOntology("Linha");
-                msg.setContent("Proximidade");
-                myAgent.send(msg);
-            }
-        });
-
-        //Recebendo Retorno do Trem!
+        //Recebendo Mensagem do Trem!
         addBehaviour(new CyclicBehaviour(this) {
+
             public void action() {
                 ACLMessage msg = myAgent.receive();
+
                 if (msg != null) {
+                    ACLMessage reply = msg.createReply();
                     String content = msg.getContent();
-                    System.out.println("--> " + msg.getSender().getName() + ":" + content);
-                    
-                    //Verificar a Resposta do Trem se Perto ou não
-                    if (content.matches("Próximo")) {
-                        tremProximo = true;
+                    String ontology = msg.getOntology();
+                    String array[] = new String[2];
+
+                    //Recebendo a mensagem do Trem.
+                    if (ontology.matches("Distância")) {
+
+                        //Verifica a distancia
+                        
+                        array = content.split(":");
+                        
+                        if ( ( Integer.parseInt(array[1]) > 5 ) || ( Integer.parseInt(array[1]) < 15) ) {
+                            tremProximo = true; //Se o Trem está próximo
+                        } else { 
+                            tremProximo = false; //Se o Trem está Longe
+                        }                    
                     }
-                    
-                } else //Com o block() bloqueamos o comportamento até que uma nova
-                //mensagem chegue ao agente e assim evitamos consumir ciclos
-                // da CPU.
-                {
+                } else {
                     block();
                 }
             }
@@ -63,15 +59,16 @@ public class AgenteSemaforo extends Agent {
                 msg.addReceiver(new AID("AgenteCarro", AID.ISLOCALNAME));
                 msg.setLanguage("Português");
                 msg.setOntology("Estrada");
-                
+
                 if (tremProximo) {
-                msg.setContent("Fechado");
-                }else{
-                msg.setContent("Aberto");
+                    msg.setContent("Fechado");
+                } else {
+                    msg.setContent("Aberto");
                 }
-                
+
                 myAgent.send(msg);
             }
         });
     }
+
 }
