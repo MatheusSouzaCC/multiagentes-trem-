@@ -18,13 +18,13 @@ import jade.lang.acl.ACLMessage;
 public class AgenteTrem extends Agent {
 
     protected void setup() {
-
+        System.out.println("Trem inicializado");
         //Recebendo Mensagem do Semaforo
         addBehaviour(new CyclicBehaviour(this) {
-
+            
             public void action() {
                 ACLMessage msg = myAgent.receive();
-
+                
                 if (msg != null) {
                     ACLMessage reply = msg.createReply();
                     String content = msg.getContent();

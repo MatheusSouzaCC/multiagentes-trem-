@@ -24,8 +24,9 @@ public class AgenteSemaforo extends Agent {
         // Enviando Mensagem pro AgenteTrem perguntando se está perto!
         addBehaviour(new OneShotBehaviour(this) {
             public void action() {
+                System.out.println("Semaforo Inicializado");
                 ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-                msg.addReceiver(new AID("AgenteCarro", AID.ISLOCALNAME));
+                msg.addReceiver(new AID("AgenteTrem", AID.ISLOCALNAME));
                 msg.setLanguage("Português");
                 msg.setOntology("Linha");
                 msg.setContent("Proximidade");

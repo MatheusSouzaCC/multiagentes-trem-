@@ -5,6 +5,13 @@
  */
 package multiagentestrem;
 
+import jade.core.Profile;
+import jade.core.ProfileImpl;
+import jade.wrapper.AgentController;
+import jade.wrapper.ContainerController;
+import jade.wrapper.StaleProxyException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -17,9 +24,29 @@ public class MultiagentesTrem {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        JFrame jf = new TelaPrincipal();
-        jf.setVisible(true);
+
+        jade.core.Runtime rt = jade.core.Runtime.instance();
+        Profile p = new ProfileImpl();
+        ContainerController cc = rt.createMainContainer(p);
+
+        try {
+            AgentController carroController, tremController, semaforoController;
+            
+            carroController = cc.createNewAgent("AgenteCarro", "multiagentestrem.AgenteCarro", args);
+            carroController.start();
+            
+            tremController = cc.createNewAgent("AgenteTrem", "multiagentestrem.AgenteTrem", args);
+            tremController.start();
+            
+            semaforoController = cc.createNewAgent("AgenteSemaforo", "multiagentestrem.AgenteSemaforo", args);
+            semaforoController.start();
+            
+        } catch (StaleProxyException ex) {
+            Logger.getLogger(MultiagentesTrem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        //JFrame jf = new TelaPrincipal();
+        //jf.setVisible(true);
     }
-    
+
 }

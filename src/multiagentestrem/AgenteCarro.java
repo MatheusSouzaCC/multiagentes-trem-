@@ -13,10 +13,10 @@ import jade.core.behaviours.CyclicBehaviour;
  *
  * @author julio
  */
-public class AgenteCarro extends Agent{
-    
-        protected void setup() {
-            
+public class AgenteCarro extends Agent {
+
+    protected void setup() {
+        System.out.println("Carro inicializado");
 //Recebendo Mensagem do Semaforo
         addBehaviour(new CyclicBehaviour(this) {
 
@@ -26,7 +26,7 @@ public class AgenteCarro extends Agent{
                 if (msg != null) {
                     ACLMessage reply = msg.createReply();
                     String content = msg.getContent();
-                    
+
                     //Recebendo a mensagem do Semaforo.
                     //Recebendo que o Semaforo está fechado, e que vai aguardar a liberação
                     if (content.equalsIgnoreCase("Fechado")) {
@@ -35,14 +35,14 @@ public class AgenteCarro extends Agent{
 //                        myAgent.send(reply);
                         System.out.println("O agente " + msg.getSender().getName() + " avisou que o Semaforo está Fechado");
                         System.out.println("Vou aguardar a liberação!");
-                    
-                    //Recebendo que o Semaforo está Aberto, e que vai Continuar o trajeto
-                    }else if(content.equalsIgnoreCase("Aberto")){
+
+                        //Recebendo que o Semaforo está Aberto, e que vai Continuar o trajeto
+                    } else if (content.equalsIgnoreCase("Aberto")) {
 //                        reply.setPerformative(ACLMessage.INFORM);
 //                        reply.setContent("Recebi seu aviso! Estou Continunado meu Trajeto");
 //                        myAgent.send(reply);
                         System.out.println("O agente " + msg.getSender().getName() + " avisou que o Semaforo está Aberto");
-                        System.out.println("Vou continuar meu Trajeto!");                        
+                        System.out.println("Vou continuar meu Trajeto!");
                     }
                 } else {
                     block();
@@ -50,5 +50,5 @@ public class AgenteCarro extends Agent{
             }
         });
     }
-    
+
 }
