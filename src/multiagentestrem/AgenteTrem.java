@@ -31,7 +31,7 @@ public class AgenteTrem extends Agent {
 
                     //Recebendo a mensagem do Semaforo.
                     //Recebendo a pergunta do Semaforo: "Está Próximo?"
-                    if (content.equalsIgnoreCase("Proximo")) {
+                    if (content.equalsIgnoreCase("Proximidade")) {
                         reply.setPerformative(ACLMessage.INFORM);
                         
                         //Verifica a distancia

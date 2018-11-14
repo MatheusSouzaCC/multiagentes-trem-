@@ -28,7 +28,7 @@ public class AgenteSemaforo extends Agent {
                 msg.addReceiver(new AID("AgenteCarro", AID.ISLOCALNAME));
                 msg.setLanguage("Português");
                 msg.setOntology("Linha");
-                msg.setContent("Proximo");
+                msg.setContent("Proximidade");
                 myAgent.send(msg);
             }
         });
