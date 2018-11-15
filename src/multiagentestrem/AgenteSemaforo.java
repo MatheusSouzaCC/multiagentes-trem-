@@ -40,6 +40,7 @@ public class AgenteSemaforo extends Agent {
                         
                         array = content.split(":");
                         
+                        System.out.println(array[1]);
                         if ( ( Integer.parseInt(array[1]) > 5 ) || ( Integer.parseInt(array[1]) < 15) ) {
                             tremProximo = true; //Se o Trem está próximo
                         } else { 
@@ -53,7 +54,7 @@ public class AgenteSemaforo extends Agent {
         });
 
         // Enviando Mensagem pro AgenteCarro que o Sinal Está fechado!
-        addBehaviour(new OneShotBehaviour(this) {
+        addBehaviour(new CyclicBehaviour(this) {
             public void action() {
                 ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
                 msg.addReceiver(new AID("AgenteCarro", AID.ISLOCALNAME));

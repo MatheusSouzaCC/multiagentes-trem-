@@ -22,7 +22,7 @@ public class AgenteTrem extends Agent {
         //Recebendo Mensagem do Semaforo
 
         // Enviando Mensagem pro AgenteSemaforo avisando que está perto!
-        addBehaviour(new OneShotBehaviour(this) {
+        addBehaviour(new CyclicBehaviour(this) {
             public void action() {
                 String mensagem;
                 System.out.println("Trem Inicializado");
