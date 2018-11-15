@@ -19,18 +19,7 @@ import javax.swing.JLabel;
 public class AgenteCarro extends Agent {
     
     protected void setup() {
-        Object[] args = getArguments() ;
-        JFrame jf = (JFrame) args[0];
-        System.out.println("Carro inicializado");
-        
-        JLabel carro = new JLabel();
-        carro.setBounds(0, 0, 20, 41);
-
-        String path =  System.getProperty("user.dir");
-        
-        ImageIcon image = new ImageIcon(path + "\\src\\multiagentestrem\\imagens\\carro1.png");
-        carro.setIcon(image);
-        jf.getContentPane().add(carro);
+        InicializarCarro();
         
         
 //Recebendo Mensagem do Semaforo
@@ -59,6 +48,45 @@ public class AgenteCarro extends Agent {
                 }
             }
         });
+    }
+
+    /*
+        Inicializa o carro e adiciona na tela
+    */
+    private void InicializarCarro() {
+        Object[] args = getArguments() ;
+        //a instância da telaé passada como primeiro argumento
+        TelaPrincipal telaPrincipal = (TelaPrincipal) args[0];
+        
+       JLabel estrada1 = telaPrincipal.getEstrada1();
+       JLabel estrada2 = telaPrincipal.getEstrada2();
+        
+        //o parâmtro [1] é a direção (1 pra cima e 2 pra baixo)
+        int direcao = 1;
+        if(args[1] != null){
+            direcao = (int)args[1];
+        }
+        int x = 110, y = 275;
+        
+        if(direcao == 2){
+            x = 35;
+            y = 0;
+        }
+        
+        JLabel carro = new JLabel();
+        carro.setBounds(x, y, 20, 41);
+        
+
+        String path =  System.getProperty("user.dir");
+        ImageIcon image = new ImageIcon(path + "\\src\\multiagentestrem\\imagens\\carro" + direcao + ".png");
+        carro.setIcon(image);
+        
+        if(direcao == 1){
+            estrada1.add(carro);
+        }else{
+            estrada2.add(carro);
+        }
+        System.out.println("Carro inicializado");
     }
 
 }

@@ -5,6 +5,8 @@
  */
 package multiagentestrem;
 
+import javax.swing.JLabel;
+
 /**
  *
  * @author 5927161
@@ -27,17 +29,33 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        estrada2 = new javax.swing.JLabel();
+        estrada1 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        estrada2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multiagentestrem/imagens/estrada.jpg"))); // NOI18N
+
+        estrada1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multiagentestrem/imagens/estrada.jpg"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 650, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(596, 596, 596)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(estrada1)
+                    .addComponent(estrada2))
+                .addContainerGap(628, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 415, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(estrada2)
+                .addGap(107, 107, 107)
+                .addComponent(estrada1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -49,9 +67,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with testrada1ult look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -69,7 +88,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -77,7 +96,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
     }
+    
+    public JLabel getEstrada1(){
+        return estrada1;
+    }
+    
+    public JLabel getEstrada2(){
+        return estrada2;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel estrada1;
+    private javax.swing.JLabel estrada2;
     // End of variables declaration//GEN-END:variables
 }
