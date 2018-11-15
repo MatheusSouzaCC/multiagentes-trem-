@@ -18,6 +18,7 @@ import jade.core.AID;
 public class AgenteSemaforo extends Agent {
 
     boolean tremProximo;
+    boolean ultimoTremProximo;
 
     protected void setup() {
 
@@ -37,14 +38,13 @@ public class AgenteSemaforo extends Agent {
                     if (ontology.matches("Distância")) {
 
                         //Verifica a distancia
-                        
                         array = content.split(":");
-                        
-                        if ( ( Integer.parseInt(array[1]) > 5 ) || ( Integer.parseInt(array[1]) < 15) ) {
+
+                        if ((Integer.parseInt(array[1]) > 5) && (Integer.parseInt(array[1]) < 15)) {
                             tremProximo = true; //Se o Trem está próximo
-                        } else { 
+                        } else {
                             tremProximo = false; //Se o Trem está Longe
-                        }                    
+                        }
                     }
                 } else {
                     block();
@@ -53,7 +53,7 @@ public class AgenteSemaforo extends Agent {
         });
 
         // Enviando Mensagem pro AgenteCarro que o Sinal Está fechado!
-        addBehaviour(new OneShotBehaviour(this) {
+        addBehaviour(new CyclicBehaviour(this) {
             public void action() {
                 ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
                 msg.addReceiver(new AID("AgenteCarro", AID.ISLOCALNAME));
@@ -61,12 +61,19 @@ public class AgenteSemaforo extends Agent {
                 msg.setOntology("Estrada");
 
                 if (tremProximo) {
-                    msg.setContent("Fechado");
+                    if (ultimoTremProximo == false) {
+                        msg.setContent("Fechado");
+                        ultimoTremProximo = true;
+                        myAgent.send(msg);
+                    }
                 } else {
-                    msg.setContent("Aberto");
+                    if (ultimoTremProximo == true) {
+                        msg.setContent("Aberto");
+                        ultimoTremProximo = false;
+                        myAgent.send(msg);
+                    }
                 }
 
-                myAgent.send(msg);
             }
         });
     }
