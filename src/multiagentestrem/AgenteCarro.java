@@ -17,7 +17,8 @@ import javax.swing.JLabel;
  * @author julio
  */
 public class AgenteCarro extends Agent {
-    
+    private int velocidade = 50;
+
     protected void setup() {
         InicializarCarro();
         
