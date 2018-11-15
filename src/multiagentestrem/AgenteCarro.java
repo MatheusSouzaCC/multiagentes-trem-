@@ -8,15 +8,31 @@ package multiagentestrem;
 import jade.core.Agent;
 import jade.lang.acl.ACLMessage;
 import jade.core.behaviours.CyclicBehaviour;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 /**
  *
  * @author julio
  */
 public class AgenteCarro extends Agent {
-
+    
     protected void setup() {
+        Object[] args = getArguments() ;
+        JFrame jf = (JFrame) args[0];
         System.out.println("Carro inicializado");
+        
+        JLabel carro = new JLabel();
+        carro.setBounds(0, 0, 20, 41);
+
+        String path =  System.getProperty("user.dir");
+        
+        ImageIcon image = new ImageIcon(path + "\\src\\multiagentestrem\\imagens\\carro1.png");
+        carro.setIcon(image);
+        jf.getContentPane().add(carro);
+        
+        
 //Recebendo Mensagem do Semaforo
         addBehaviour(new CyclicBehaviour(this) {
 
