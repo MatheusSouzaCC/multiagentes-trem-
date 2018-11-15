@@ -31,31 +31,57 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         estrada2 = new javax.swing.JLabel();
         estrada1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        trilho = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(1280, 866));
+        setMinimumSize(new java.awt.Dimension(1280, 866));
+        setPreferredSize(new java.awt.Dimension(1280, 866));
+        setResizable(false);
 
         estrada2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multiagentestrem/imagens/estrada.jpg"))); // NOI18N
 
         estrada1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multiagentestrem/imagens/estrada.jpg"))); // NOI18N
 
+        trilho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multiagentestrem/imagens/trilho.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(549, 549, 549))
             .addGroup(layout.createSequentialGroup()
-                .addGap(596, 596, 596)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(estrada1)
-                    .addComponent(estrada2))
-                .addContainerGap(628, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(trilho))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(595, 595, 595)
+                        .addComponent(estrada1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(597, 597, 597)
+                        .addComponent(estrada2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(estrada2)
-                .addGap(107, 107, 107)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(497, 497, 497)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(estrada2)
+                        .addGap(38, 38, 38)
+                        .addComponent(trilho)))
+                .addGap(4, 4, 4)
                 .addComponent(estrada1)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -108,5 +134,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel estrada1;
     private javax.swing.JLabel estrada2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel trilho;
     // End of variables declaration//GEN-END:variables
 }

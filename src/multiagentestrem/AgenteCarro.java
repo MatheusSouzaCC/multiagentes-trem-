@@ -83,9 +83,14 @@ public class AgenteCarro extends Agent {
         
         if(direcao == 1){
             estrada1.add(carro);
+            estrada1.revalidate();
+            estrada1.repaint();
         }else{
             estrada2.add(carro);
+            estrada2.revalidate();
+            estrada2.repaint();
         }
+        
         System.out.println("Carro inicializado");
     }
 
