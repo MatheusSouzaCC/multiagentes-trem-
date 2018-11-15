@@ -16,7 +16,8 @@ import java.util.Random;
  * @author julio
  */
 public class AgenteTrem extends Agent {
-
+    private int velocidade = 100;
+    
     protected void setup() {
         //System.out.println("Trem inicializado");
         //Recebendo Mensagem do Semaforo
