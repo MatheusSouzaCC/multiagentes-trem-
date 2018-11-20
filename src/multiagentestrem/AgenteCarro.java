@@ -58,37 +58,65 @@ public class AgenteCarro extends Agent {
             public void action() {
                 Rectangle bounds = carro.getBounds();
                 if (direcao == 1) {
-                    if (carro.getBounds().y <= -40) {
-                        if (estradaAtual == 1) {
-                            estrada1.remove(carro);
+
+                    if (estradaAtual != 3) {
+                        if (carro.getBounds().y <= -40) {
+                            if (estradaAtual == 1) {
+                                estrada1.remove(carro);
+                                carro.setBounds(693, 95, 20, 41);
+                                trilho.add(carro);
+                                estradaAtual = 3;
+                            } else {
+                                estrada2.remove(carro);
+                                carro.setBounds(110, 275, 20, 41);
+                                estrada1.add(carro);
+                                estradaAtual = 1;
+                            }
+                        } else {
+                            carro.setBounds(bounds.x, bounds.y - 10, bounds.width, bounds.height);
+                        }
+                    } else {
+                        if (carro.getBounds().y <= -30) {
+
+                            trilho.remove(carro);
+                            trilho.revalidate();
+                            trilho.repaint();
                             carro.setBounds(110, 300, 20, 41);
                             estrada2.add(carro);
                             estradaAtual = 2;
                         } else {
-                            estrada2.remove(carro);
-                            carro.setBounds(110, 275, 20, 41);
-                            estrada1.add(carro);
-                            estradaAtual = 1;
+                            carro.setBounds(bounds.x, bounds.y - 10, bounds.width, bounds.height);
                         }
-                    } else {
-                        carro.setBounds(bounds.x, bounds.y - 10, bounds.width, bounds.height);
                     }
                 } else {
-                    if (carro.getBounds().y >= 315) {
-                        if(estradaAtual == 2){
-                            estrada2.remove(carro);
+                    if (estradaAtual != 3) {
+                        if (carro.getBounds().y >= 315) {
+                            if (estradaAtual == 2) {
+                                estrada2.remove(carro);
+                                carro.setBounds(615, -30, 20, 41);
+                                trilho.add(carro);
+                                estradaAtual = 3;
+                            } else {
+                                estrada1.remove(carro);
+                                carro.setBounds(35, 0, 20, 41);
+                                estrada2.add(carro);
+                                estradaAtual = 2;
+                            }
+
+                        } else {
+                            carro.setBounds(bounds.x, bounds.y + 10, bounds.width, bounds.height);
+                        }
+                    } else {
+                        if (carro.getBounds().y >= 95) {
+                            trilho.remove(carro);
+                            trilho.revalidate();
+                            trilho.repaint();
                             carro.setBounds(35, 0, 20, 41);
                             estrada1.add(carro);
                             estradaAtual = 1;
-                        }else{
-                            estrada1.remove(carro);
-                            carro.setBounds(35, 0, 20, 41);
-                            estrada2.add(carro);
-                            estradaAtual = 2;
+                        } else {
+                            carro.setBounds(bounds.x, bounds.y + 10, bounds.width, bounds.height);
                         }
-                        
-                    } else {
-                        carro.setBounds(bounds.x, bounds.y + 10, bounds.width, bounds.height);
                     }
                 }
 
@@ -137,6 +165,8 @@ public class AgenteCarro extends Agent {
             estrada2.revalidate();
             estrada2.repaint();
         }
+        trilho.revalidate();
+        trilho.repaint();
 
         System.out.println("Carro inicializado");
     }
