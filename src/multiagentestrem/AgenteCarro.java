@@ -13,6 +13,7 @@ import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import jade.core.behaviours.OneShotBehaviour;
 
 /**
  *
@@ -29,20 +30,20 @@ public class AgenteCarro extends Agent {
         InicializarCarro();
 
 //Enviando Mensagem pro Semaforo
-        addBehaviour(new CyclicBehaviour(this) {
-
-            public void action() {
-
-                ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-                msg.addReceiver(new AID("AgenteSemaforo", AID.ISLOCALNAME));
-                msg.setLanguage("Português");
-                msg.setOntology("Sinaleira");
-                msg.setContent("Aberto");
-                myAgent.send(msg);
-                block(1000);
-
-            }
-        });
+        //addBehaviour(new CyclicBehaviour(this) {
+//        addBehaviour(new OneShotBehaviour(this) {
+//
+//            public void action() {
+//                ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+//                msg.addReceiver(new AID("AgenteSemaforo", AID.ISLOCALNAME));
+//                msg.setLanguage("Português");
+//                msg.setOntology("Sinaleira");
+//                msg.setContent("Aberto");
+//                myAgent.send(msg);
+//                block(1000);
+//
+//            }
+//        });
 
         //Recebendo Resposta do Semaforo
         addBehaviour(new CyclicBehaviour(this) {
@@ -69,6 +70,11 @@ public class AgenteCarro extends Agent {
         //andar
         addBehaviour(new CyclicBehaviour(this) {
             public void action() {
+                
+                if (carro.getBounds().y <= -40) {
+                    enviarMensagem();
+                }
+                
                 Rectangle bounds = carro.getBounds();
                 if (direcao == 1) {
 
@@ -164,7 +170,7 @@ public class AgenteCarro extends Agent {
         }
 
         carro.setBounds(x, y, 20, 41);
-
+        
         String path = System.getProperty("user.dir");
         ImageIcon image = new ImageIcon(path + "\\src\\multiagentestrem\\imagens\\carro" + direcao + ".png");
         carro.setIcon(image);
@@ -182,6 +188,15 @@ public class AgenteCarro extends Agent {
         trilho.repaint();
 
         System.out.println("Carro inicializado");
+    }
+    
+    private void enviarMensagem(){
+        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+                msg.addReceiver(new AID("AgenteSemaforo", AID.ISLOCALNAME));
+                msg.setLanguage("Português");
+                msg.setOntology("Sinaleira");
+                msg.setContent("Aberto");
+                this.send(msg);
     }
 
 }
