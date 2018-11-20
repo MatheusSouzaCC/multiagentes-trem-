@@ -29,7 +29,6 @@ public class AgenteSemaforo extends Agent {
                 ACLMessage msg = myAgent.receive();
 
                 if (msg != null) {
-                    ACLMessage reply = msg.createReply();
                     String content = msg.getContent();
                     String ontology = msg.getOntology();
                     String array[] = new String[2];
@@ -45,6 +44,20 @@ public class AgenteSemaforo extends Agent {
                         } else {
                             tremProximo = false; //Se o Trem está Longe
                         }
+
+                    } else if (ontology.matches("Sinaleira")) {
+
+                        ACLMessage reply = msg.createReply();
+
+                        reply.setPerformative(ACLMessage.INFORM);
+                        if (tremProximo) {
+                            reply.setContent("Fechado");
+                        } else {
+                            reply.setContent("Aberto");
+                        }
+
+                        myAgent.send(reply);
+
                     }
                 } else {
                     block();

@@ -5,6 +5,7 @@
  */
 package multiagentestrem;
 
+import jade.core.AID;
 import jade.core.Agent;
 import jade.lang.acl.ACLMessage;
 import jade.core.behaviours.CyclicBehaviour;
@@ -27,32 +28,44 @@ public class AgenteCarro extends Agent {
     protected void setup() {
         InicializarCarro();
 
-//Recebendo Mensagem do Semaforo
+//Enviando Mensagem pro Semaforo
         addBehaviour(new CyclicBehaviour(this) {
 
             public void action() {
-                ACLMessage msg = myAgent.receive();
 
+                ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+                msg.addReceiver(new AID("AgenteSemaforo", AID.ISLOCALNAME));
+                msg.setLanguage("Português");
+                msg.setOntology("Sinaleira");
+                msg.setContent("Aberto");
+                myAgent.send(msg);
+                block(1000);
+
+            }
+        });
+
+        //Recebendo Resposta do Semaforo
+        addBehaviour(new CyclicBehaviour(this) {
+
+            public void action() {
+
+                ACLMessage msg = myAgent.receive();
                 if (msg != null) {
-                    ACLMessage reply = msg.createReply();
                     String content = msg.getContent();
 
-                    //Recebendo a mensagem do Semaforo.
-                    //Recebendo que o Semaforo está fechado, e que vai aguardar a liberação
-                    if (content.equalsIgnoreCase("Fechado")) {
-                        System.out.println("O agente " + msg.getSender().getName() + " avisou que o Semaforo está Fechado");
-                        System.out.println("Vou aguardar a liberação!");
+                    if (content.matches("Fechado")) {
 
-                        //Recebendo que o Semaforo está Aberto, e que vai Continuar o trajeto
-                    } else if (content.equalsIgnoreCase("Aberto")) {
-                        System.out.println("O agente " + msg.getSender().getName() + " avisou que o Semaforo está Aberto");
-                        System.out.println("Vou continuar meu Trajeto!");
+                    } else if (content.matches("Aberto")) {
+
                     }
+
                 } else {
                     block();
                 }
+
             }
         });
+
         //andar
         addBehaviour(new CyclicBehaviour(this) {
             public void action() {
