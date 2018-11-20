@@ -53,6 +53,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(estrada1)
+                .addGap(282, 282, 282)
                 .addComponent(jLabel1)
                 .addGap(549, 549, 549))
             .addGroup(layout.createSequentialGroup()
@@ -61,9 +63,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(trilho))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(595, 595, 595)
-                        .addComponent(estrada1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(597, 597, 597)
                         .addComponent(estrada2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -71,17 +70,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(estrada2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(trilho)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(497, 497, 497)
+                        .addGap(71, 71, 71)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(estrada2)
-                        .addGap(38, 38, 38)
-                        .addComponent(trilho)))
-                .addGap(4, 4, 4)
-                .addComponent(estrada1)
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(estrada1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -129,6 +128,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     
     public JLabel getEstrada2(){
         return estrada2;
+    }
+    
+    public JLabel getTrilho(){
+        return trilho;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

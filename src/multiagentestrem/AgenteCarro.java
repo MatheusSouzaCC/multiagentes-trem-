@@ -21,8 +21,8 @@ public class AgenteCarro extends Agent {
 
     private int velocidade = 50;
     private int direcao = 1;
-    private JLabel estrada1, estrada2, carro;
-    private int estradaAtual = 1;
+    private JLabel estrada1, estrada2, carro, trilho;
+    private int estradaAtual = 1;//1 para estrada 1, 2 para estrada 2, 3 para trilho
 
     protected void setup() {
         InicializarCarro();
@@ -108,6 +108,7 @@ public class AgenteCarro extends Agent {
 
         estrada1 = telaPrincipal.getEstrada1();
         estrada2 = telaPrincipal.getEstrada2();
+        trilho = telaPrincipal.getTrilho();
 
         //o parâmtro [1] é a direção (1 pra cima e 2 pra baixo)
         if (args[1] != null) {
