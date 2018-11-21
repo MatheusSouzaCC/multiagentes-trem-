@@ -33,6 +33,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         estrada1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         trilho = new javax.swing.JLabel();
+        semaforo_invertido = new javax.swing.JLabel();
+        semaforo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -47,6 +49,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         trilho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multiagentestrem/imagens/trilho.png"))); // NOI18N
 
+        semaforo_invertido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multiagentestrem/imagens/semaforo_aberto_invertido.png"))); // NOI18N
+
+        semaforo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multiagentestrem/imagens/semaforo_aberto.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -54,8 +60,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(estrada1)
-                .addGap(282, 282, 282)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(282, 282, 282)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(semaforo)))
                 .addGap(549, 549, 549))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -63,23 +74,32 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(trilho))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(597, 597, 597)
+                        .addGap(562, 562, 562)
+                        .addComponent(semaforo_invertido)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(estrada2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(estrada2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(estrada2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(semaforo_invertido)
+                        .addGap(30, 30, 30)))
                 .addComponent(trilho)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(estrada1)))
+                        .addComponent(estrada1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(semaforo)
+                            .addComponent(jLabel1))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -133,11 +153,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public JLabel getTrilho(){
         return trilho;
     }
+    
+    public JLabel getSemaforo(){
+        return semaforo;
+    }
+    
+    public JLabel getSemaforoInvertido(){
+        return semaforo_invertido;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel estrada1;
     private javax.swing.JLabel estrada2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel semaforo;
+    private javax.swing.JLabel semaforo_invertido;
     private javax.swing.JLabel trilho;
     // End of variables declaration//GEN-END:variables
 }

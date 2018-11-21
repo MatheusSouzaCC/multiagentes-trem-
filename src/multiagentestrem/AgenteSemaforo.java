@@ -10,6 +10,8 @@ import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.core.AID;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -17,11 +19,15 @@ import jade.core.AID;
  */
 public class AgenteSemaforo extends Agent {
 
-    boolean tremProximo;
-    boolean ultimoTremProximo;
+    boolean tremProximo, ultimoTremProximo, aberto = true;
+    JLabel semaforo, semaforoInvertido;
+    String semaforoAbertoUrl = "semaforo_aberto.png",
+            semaforoAbertoInvertidoUrl = "semaforo_aberto_invertido.png",
+            semaforoFechadoUrl = "semaforo_fechado.png",
+            semaforoFechadoInvertidoUrl = "semaforo_fechado_invertido.png";
 
     protected void setup() {
-
+        Inicializar();
         //Recebendo Mensagem do Trem!
         addBehaviour(new CyclicBehaviour(this) {
 
@@ -76,19 +82,44 @@ public class AgenteSemaforo extends Agent {
                 if (tremProximo) {
                     if (ultimoTremProximo == false) {
                         msg.setContent("Fechado");
+                        aberto = false;
                         ultimoTremProximo = true;
                         myAgent.send(msg);
+                        AlternarSemaforo();
+                        aberto = true;
                     }
                 } else {
                     if (ultimoTremProximo == true) {
                         msg.setContent("Aberto");
                         ultimoTremProximo = false;
+                        AlternarSemaforo();
                         myAgent.send(msg);
                     }
                 }
 
             }
         });
+    }
+
+    private void Inicializar() {
+        Object[] args = getArguments();
+        TelaPrincipal telaPrincipal = (TelaPrincipal) args[0];
+        semaforo = telaPrincipal.getSemaforo();
+        semaforoInvertido = telaPrincipal.getSemaforoInvertido();
+    }
+
+    private void AlternarSemaforo() {
+        String path = System.getProperty("user.dir") + "\\src\\multiagentestrem\\imagens\\";
+        
+        if (aberto) {
+            semaforo.setIcon(new ImageIcon(path + semaforoAbertoUrl));
+            semaforoInvertido.setIcon(new ImageIcon(path + semaforoAbertoInvertidoUrl));
+        } else {
+            semaforo.setIcon(new ImageIcon(path + semaforoFechadoUrl));
+            semaforoInvertido.setIcon(new ImageIcon(path + semaforoFechadoInvertidoUrl));
+        }
+        semaforo.repaint();
+        semaforoInvertido.repaint();
     }
 
 }

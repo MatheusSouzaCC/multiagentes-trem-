@@ -45,7 +45,7 @@ public class MultiagentesTrem {
             tremController = cc.createNewAgent("AgenteTrem", "multiagentestrem.AgenteTrem", args);
             tremController.start();
 
-            semaforoController = cc.createNewAgent("AgenteSemaforo", "multiagentestrem.AgenteSemaforo", args);
+            semaforoController = cc.createNewAgent("AgenteSemaforo", "multiagentestrem.AgenteSemaforo", new Object[]{telaPrincipal});
             semaforoController.start();
 
             telaPrincipal.setVisible(true);
