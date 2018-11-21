@@ -201,7 +201,6 @@ public class AgenteCarro extends Agent {
         trilho.revalidate();
         trilho.repaint();
 
-        System.out.println("Carro inicializado");
     }
 
     private void EnviarMensagem() {

@@ -45,7 +45,6 @@ public class AgenteTrem extends Agent {
 
                 // Manda mensagem apenas se está próximo
                 mensagem = ("Estou no KM:" + bounds.x);
-                System.out.println(mensagem);
                 msg.setContent(mensagem);
 
                 myAgent.send(msg);
@@ -94,6 +93,5 @@ public class AgenteTrem extends Agent {
         trilho.revalidate();
         trilho.repaint();
 
-        System.out.println("Trem inicializado");
     }
 }
