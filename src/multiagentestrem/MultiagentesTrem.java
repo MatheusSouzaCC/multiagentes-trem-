@@ -42,7 +42,7 @@ public class MultiagentesTrem {
             carroController2 = cc.createNewAgent("AgenteCarro2", "multiagentestrem.AgenteCarro", new Object[]{telaPrincipal, 2});
             carroController2.start();
 
-            tremController = cc.createNewAgent("AgenteTrem", "multiagentestrem.AgenteTrem", args);
+            tremController = cc.createNewAgent("AgenteTrem", "multiagentestrem.AgenteTrem", new Object[]{telaPrincipal});
             tremController.start();
 
             semaforoController = cc.createNewAgent("AgenteSemaforo", "multiagentestrem.AgenteSemaforo", new Object[]{telaPrincipal});

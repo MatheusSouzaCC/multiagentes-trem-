@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import jade.core.behaviours.OneShotBehaviour;
+import java.io.File;
 
 /**
  *
@@ -185,9 +186,9 @@ public class AgenteCarro extends Agent {
         carro.setBounds(x, y, 20, 41);
 
         String path = System.getProperty("user.dir");
-        ImageIcon image = new ImageIcon(path + "\\src\\multiagentestrem\\imagens\\carro" + direcao + ".png");
+        ImageIcon image = new ImageIcon(path + File.separator + "src" + File.separator + "multiagentestrem" + File.separator +"imagens" + File.separator + "carro" + direcao + ".png");
         carro.setIcon(image);
-
+        
         if (direcao == 1) {
             estrada1.add(carro);
             estrada1.revalidate();

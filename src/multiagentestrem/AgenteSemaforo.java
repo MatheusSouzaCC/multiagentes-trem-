@@ -10,6 +10,7 @@ import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.core.AID;
+import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -109,7 +110,7 @@ public class AgenteSemaforo extends Agent {
     }
 
     private void AlternarSemaforo() {
-        String path = System.getProperty("user.dir") + "\\src\\multiagentestrem\\imagens\\";
+        String path = System.getProperty("user.dir") + File.separator +"src" + File.separator + "multiagentestrem" + File.separator + "imagens" + File.separator;
         
         if (aberto) {
             semaforo.setIcon(new ImageIcon(path + semaforoAbertoUrl));
