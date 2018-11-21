@@ -46,7 +46,7 @@ public class AgenteSemaforo extends Agent {
                         //Verifica a distancia
                         array = content.split(":");
 
-                        if ((Integer.parseInt(array[1]) > 5) && (Integer.parseInt(array[1]) < 15)) {
+                        if ((Integer.parseInt(array[1]) > -150) && (Integer.parseInt(array[1]) < 850)) {
                             tremProximo = true; //Se o Trem está próximo
                         } else {
                             tremProximo = false; //Se o Trem está Longe

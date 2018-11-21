@@ -44,10 +44,10 @@ public class AgenteTrem extends Agent {
                 msg.setLanguage("Português");
                 msg.setOntology("Distância");
 
-                int n = rand.nextInt(30) + 1;
+                Rectangle bounds = trem.getBounds();
 
                 // Manda mensagem apenas se está próximo
-                mensagem = ("Estou no KM:" + n);
+                mensagem = ("Estou no KM:" + bounds.x);
                 System.out.println(mensagem);
                 msg.setContent(mensagem);
 
@@ -60,13 +60,11 @@ public class AgenteTrem extends Agent {
         addBehaviour(new CyclicBehaviour(this) {
             public void action() {
                 Rectangle bounds = trem.getBounds();
-                trem.setBounds(bounds.x - 1, bounds.y, bounds.width, bounds.height);
+                trem.setBounds(bounds.x - 5, bounds.y, bounds.width, bounds.height);
                 
-                if(bounds.x == -170){
-                    trem.setBounds(1300, 33, 170, 35);
-                    Random r = new Random();
-                    int low = 10000, high = 15000;
-                    block(r.nextInt(high-low) + low);
+                if(bounds.x == -700){
+                    trem.setBounds(1300, 17, 718, 66);
+                    block(5000);
                 }
                 
                 block(40);
@@ -86,7 +84,7 @@ public class AgenteTrem extends Agent {
         trilho = telaPrincipal.getTrilho();
 
         //o parâmtro [1] é a direção (1 pra cima e 2 pra baixo)
-        int x = 1250, y = 17;
+        int x = 1300, y = 17;
 
         trem.setBounds(x, y, 718, 66);
 
