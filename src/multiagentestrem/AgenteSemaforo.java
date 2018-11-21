@@ -83,6 +83,7 @@ public class AgenteSemaforo extends Agent {
                 if (tremProximo) {
                     if (ultimoTremProximo == false) {
                         msg.setContent("Fechado");
+                        System.out.println("Semáforo fechado");
                         aberto = false;
                         ultimoTremProximo = true;
                         myAgent.send(msg);
@@ -92,6 +93,7 @@ public class AgenteSemaforo extends Agent {
                 } else {
                     if (ultimoTremProximo == true) {
                         msg.setContent("Aberto");
+                        System.out.println("Semáforo aberto");
                         ultimoTremProximo = false;
                         AlternarSemaforo();
                         myAgent.send(msg);

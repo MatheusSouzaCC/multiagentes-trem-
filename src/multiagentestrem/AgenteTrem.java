@@ -28,8 +28,6 @@ public class AgenteTrem extends Agent {
 
     protected void setup() {
         InicializarTrem();
-
-        //System.out.println("Trem inicializado");
         //Recebendo Mensagem do Semaforo
 
         // Enviando Mensagem pro AgenteSemaforo avisando que está perto!
@@ -37,7 +35,6 @@ public class AgenteTrem extends Agent {
             public void action() {                
                 Random rand = new Random();
                 String mensagem;
-                System.out.println("Trem Inicializado");
 
                 ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
                 msg.addReceiver(new AID("AgenteSemaforo", AID.ISLOCALNAME));
