@@ -25,6 +25,7 @@ public class AgenteCarro extends Agent {
     private int direcao = 1;
     private JLabel estrada1, estrada2, carro, trilho;
     private int estradaAtual = 1;//1 para estrada 1, 2 para estrada 2, 3 para trilho
+    private boolean semaforoAberto = true;
 
     protected void setup() {
         InicializarCarro();
@@ -44,7 +45,6 @@ public class AgenteCarro extends Agent {
 //
 //            }
 //        });
-
         //Recebendo Resposta do Semaforo
         addBehaviour(new CyclicBehaviour(this) {
 
@@ -55,9 +55,9 @@ public class AgenteCarro extends Agent {
                     String content = msg.getContent();
 
                     if (content.matches("Fechado")) {
-
+                        semaforoAberto = false;
                     } else if (content.matches("Aberto")) {
-
+                        semaforoAberto = true;
                     }
 
                 } else {
@@ -70,11 +70,26 @@ public class AgenteCarro extends Agent {
         //andar
         addBehaviour(new CyclicBehaviour(this) {
             public void action() {
-                
-                if (carro.getBounds().y <= -40) {
-                    enviarMensagem();
+
+                if (direcao == 1 && (carro.getBounds().y <= 10 && carro.getBounds().y >= -40)) {
+                    EnviarMensagem();
+                }else if(direcao == 2 && (carro.getBounds().y >= 245 && carro.getBounds().y <= 275)){
+                    EnviarMensagem();
                 }
-                
+
+                if (((direcao == 1 && carro.getBounds().y > 10) || (direcao == 2 && carro.getBounds().y < 265))/*posições onde os carros não devem parar*/
+                        || estradaAtual == 3 /*se estiver em cima do trilho não para*/
+                        || (estradaAtual == 2 && direcao == 1) /*se estiver indo pra cima e estiver na estrada de cima não há porque parar (já passou do semáforo)*/
+                        || (estradaAtual == 1 && direcao == 2))/*mesma lógica que a de cima, mas ao contrário*/ {
+                    RealizarMovimentacao();
+                }else if(semaforoAberto){
+                    RealizarMovimentacao();
+                }
+
+                block(30);
+            }
+
+            private void RealizarMovimentacao() {
                 Rectangle bounds = carro.getBounds();
                 if (direcao == 1) {
 
@@ -138,8 +153,6 @@ public class AgenteCarro extends Agent {
                         }
                     }
                 }
-
-                block(30);
             }
         });
     }
@@ -170,7 +183,7 @@ public class AgenteCarro extends Agent {
         }
 
         carro.setBounds(x, y, 20, 41);
-        
+
         String path = System.getProperty("user.dir");
         ImageIcon image = new ImageIcon(path + "\\src\\multiagentestrem\\imagens\\carro" + direcao + ".png");
         carro.setIcon(image);
@@ -189,14 +202,14 @@ public class AgenteCarro extends Agent {
 
         System.out.println("Carro inicializado");
     }
-    
-    private void enviarMensagem(){
+
+    private void EnviarMensagem() {
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-                msg.addReceiver(new AID("AgenteSemaforo", AID.ISLOCALNAME));
-                msg.setLanguage("Português");
-                msg.setOntology("Sinaleira");
-                msg.setContent("Aberto");
-                this.send(msg);
+        msg.addReceiver(new AID("AgenteSemaforo", AID.ISLOCALNAME));
+        msg.setLanguage("Português");
+        msg.setOntology("Sinaleira");
+        msg.setContent("Aberto");
+        this.send(msg);
     }
 
 }
